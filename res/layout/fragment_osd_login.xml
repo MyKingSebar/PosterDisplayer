@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome1" >
+
+    <LinearLayout
+        android:id="@+id/osd_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/osd_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.15"
+            android:hint="@string/login_hint"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:background="@android:color/transparent" />
+        
+        <CheckBox
+            android:id="@+id/memory_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:button="@drawable/memory_pwd_sel" />
+        
+        <ImageView
+            android:id="@+id/reset_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/reset_pwd_sel" />
+        
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/osd_login"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.7"
+            android:background="@drawable/osd_login_sel" />
+
+    </LinearLayout>
+
+</RelativeLayout>

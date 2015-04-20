@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/pageStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_about" >
+
+    <TextView
+        style="@style/title_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_about" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/half_transparent"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >"
+            
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical" >
+                
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_cfe" />
+
+                    <TextView
+                        android:id="@+id/about_cfe"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_kernelver" />
+
+                    <TextView
+                        android:id="@+id/about_kernelver"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_swver" />
+
+                    <TextView
+                        android:id="@+id/about_swVer"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_hwver" />
+
+                    <TextView
+                        android:id="@+id/about_hwVer"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_mac" />
+
+                    <TextView
+                        android:id="@+id/about_MAC"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_ip" />
+
+                    <TextView
+                        android:id="@+id/about_IP"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_connStatus" />
+
+                    <TextView
+                        android:id="@+id/about_connStatus"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_certNum" />
+
+                    <TextView
+                        android:id="@+id/about_certNum"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_termGrp" />
+
+                    <TextView
+                        android:id="@+id/about_termGrp"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_diskStatus" />
+
+                    <TextView
+                        android:id="@+id/about_diskStatus"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+            </TableLayout>
+        
+        </ScrollView>
+        
+    </LinearLayout>
+
+</LinearLayout>

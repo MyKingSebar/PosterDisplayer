@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/osd_main_menu"
+    android:orientation="vertical" >
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.55"
+        android:background="@android:color/transparent" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.6"
+        android:orientation="horizontal" >
+        
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:background="@android:color/transparent" />
+        
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6.3"
+            android:orientation="vertical" >
+
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="1"
+		        android:orientation="horizontal" >
+		        
+		        <ImageView
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_main_menu_title" />
+		        
+		        <ImageView
+		            android:layout_width="0dp"
+		            android:layout_weight="2"
+		            android:layout_height="match_parent"
+		            android:background="@android:color/transparent" />
+		        
+		    </LinearLayout>
+		    
+		    <ImageView
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="0.5"
+		        android:background="@android:color/transparent" />
+		
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="5"
+		        android:orientation="horizontal" >
+		
+		        <ImageView
+		            android:id="@+id/menu_server"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_mserver_sel" />
+		
+		        <ImageView
+		            android:id="@+id/menu_clock"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_mclock_sel" />
+		
+		    </LinearLayout>
+		    
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="5"
+		        android:orientation="horizontal" >
+		        
+		        <ImageView
+		            android:id="@+id/menu_tools"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_mtools_sel" />
+		        
+		        <ImageView
+		            android:id="@+id/menu_system"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_msystem_sel" />
+		        
+		    </LinearLayout>
+		
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="5"
+		        android:orientation="horizontal" >
+		
+		        <ImageView
+		            android:id="@+id/menu_filemanage"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_mfilemanage_sel" />
+		        
+		        <ImageView
+		            android:id="@+id/menu_about"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="match_parent"
+		            android:background="@drawable/osd_mabout_sel" />
+		
+		    </LinearLayout>
+		    
+		</LinearLayout>
+		
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:background="@android:color/transparent" />
+	    
+	</LinearLayout>
+	
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>

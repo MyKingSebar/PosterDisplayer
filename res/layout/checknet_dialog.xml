@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="800dp"
+    android:layout_height="600dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
+    android:background="@color/half_transparent">
+
+    <TextView
+        style="@style/dialog_title_font"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tools_dialog_checknet_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TableRow >
+                <TextView
+                    style="@style/network_font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools_dialog_checknet_ipadress" />
+
+                <EditText
+                    android:id="@+id/network_checkip"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    style="@style/network_font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools_dialog_checknet_ipstate" />
+
+                <TextView
+                    android:id="@+id/network_connStatus"
+                    style="@style/network_message_font"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="" />
+            </TableRow>
+        
+            <TableRow>
+                <TextView
+                    style="@style/network_font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools_dialog_checknet_serverstate" />
+
+                <TextView
+                    android:id="@+id/network_serverConnStatus"
+                    style="@style/network_message_font"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="" />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center" 
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/network_checkgateway"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tools_dialog_checknet_testip" />
+        
+        <Button
+            android:id="@+id/network_checkserver"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tools_dialog_checknet_testserver" />
+
+        <Button
+            android:id="@+id/network_close"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/close"/>"
+    </LinearLayout>
+
+</LinearLayout>

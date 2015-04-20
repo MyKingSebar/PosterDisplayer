@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/osd_pop_menu_bg"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:orientation="vertical" >
+
+    <!-- 首页 -->
+    <ImageView
+        android:id="@+id/osd_mainmenu"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+       
+        android:src="@drawable/set_home" />
+    
+    <!-- 服务器参数设置 -->
+    <ImageView
+        android:id="@+id/osd_server"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+      
+        android:src="@drawable/set_server" />
+
+    <!-- 定时开关机设置  -->
+    <ImageView
+        android:id="@+id/osd_clock"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+  
+        android:src="@drawable/set_clock" />
+    
+    <!-- 系统设置(调用system setting) -->
+    <ImageView
+        android:id="@+id/osd_system"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+      
+        android:src="@drawable/set_system" />
+
+    <!-- 文件管理(调用system filemanager) -->
+    <ImageView
+        android:id="@+id/osd_filemanage"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        
+        android:src="@drawable/set_filemanage" />
+
+    <!-- 系统工具 -->
+    <ImageView
+        android:id="@+id/osd_tools"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+
+        android:src="@drawable/set_tools" />
+    
+    <!-- 关于产品 -->
+    <ImageView
+        android:id="@+id/osd_about"
+        style="@style/osdbtnStyle"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+   
+        android:src="@drawable/set_about" />
+
+</LinearLayout>

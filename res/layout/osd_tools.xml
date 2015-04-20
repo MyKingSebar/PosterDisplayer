@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/pageStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_tools" >
+
+    <TextView
+        style="@style/title_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_tools" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/half_transparent"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/tools_format_disk"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_format_disk" />
+
+                <Button
+                    android:id="@+id/tools_usb_update_program"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_usb_update_program" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/tools_configuration_file_backup"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_configuration_file_backup" />
+
+                <Button
+                    android:id="@+id/tools_configuration_file_restore"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_configuration_file_restore" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/tools_standby_screen_update"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_standby_screen_update" />
+
+                <!-- <Button
+                    android:id="@+id/tools_boot_screen_update"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_boot_screen_update" /> -->
+                <Button
+                    android:id="@+id/tools_cancel_savepwd"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_cancel_savepwd" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/tools_restore_factoty_setting"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_restore_factoty_setting" />
+
+                <Button
+                    android:id="@+id/tools_upgrage_app"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_upgrage_app" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/tools_check_network"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_check_conn" />
+
+                <Button
+                    android:id="@+id/tools_log_manager"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_log_manager" />
+            </TableRow>
+
+            <!-- <TableRow>
+
+                <Button
+                    android:id="@+id/tools_cancel_savepwd"
+                    style="@style/osd_tools_text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/tools_cancel_savepwd" />
+            </TableRow> -->
+            
+        </TableLayout>
+        
+        </ScrollView>
+        
+    </LinearLayout>
+
+</LinearLayout>

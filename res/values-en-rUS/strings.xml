@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Commercial display terminal</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Four major classification Settings interface -->
+    <string name="str_server">Server Settings</string>
+    <string name="str_clock">Time switch machine</string>
+    <string name="str_about">About our product</string>
+    <string name="str_tools">System tools</string>
+    <string name="str_on">The timing boot</string>
+    <string name="str_off">The regular shutdown</string>
+    
+     <!-- server settings -->
+	<string name="server_ftp_port">Ftp Port:</string>
+	<string name="server_ftp_id">Ftp ID:</string>
+	<string name="server_ftp_pwd">Ftp Password:</string>
+	<string name="server_ntp_port">Ntp Port:</string>
+
+    <!-- system tools -->
+    <string name="tools_format_disk">Empty disk program</string>
+    <string name="tools_usb_update_program">U disk update program</string>
+    <string name="tools_configuration_file_backup">configuration file backup</string>
+    <string name="tools_configuration_file_restore">configuration file restore</string>
+    <string name="tools_upgrage_kernel">Upgrade platform software</string>
+    <string name="tools_upgrage_app">software upgrade</string>
+    <string name="tools_boot_screen_update">Boot screen update</string>
+    <string name="tools_standby_screen_update">Standby screen update</string>
+    <string name="tools_restore_factoty_setting">Restore the factory Settings</string>
+    <string name="tools_DVB_auto_searching">DVB automatic searching</string>
+    <string name="tools_check_conn">Detect network</string>
+    <string name="tools_log_manager">Log management</string>
+    <string name="tools_cancel_savepwd">Clear record password</string>
+
+    <!-- about our product -->
+    <string name="about_cfe">Android version number:</string>
+    <string name="about_kernelver">The kernel version number:</string>
+    <string name="about_swver">Software version number:</string>
+    <string name="about_hwver">The hardware version number:</string>
+    <string name="about_mac"> M	A 	C 	address:</string>
+    <string name="about_connStatus">Network connection state:</string>
+    <string name="about_certNum">Network access license:</string>
+    <string name="about_termGrp">Terminal belong to group:</string>
+    <string name="about_diskStatus"> Disk status :</string>
+    <string name="title_activity_normal_displayer">NormalDisplayerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="about_ip">I   P      address：</string>
+
+    <!-- clock -->
+    <string name="clock_title_top">(Long period to add/change/remove)</string>
+    <string name="clock_header">Boot time - off time</string>
+    <string name="clock_boottime">Boot time:</string>
+    <string name="clock_Shutdowntime">off time:</string>
+     <string name="clock_addbtn">add new time</string>
+
+    <!-- clock dialog -->
+    <string name="clock_dialog_header">Time switch machine parameter Settings</string>
+    <string name="clock_dialog_refrech">Refresh the list</string>
+    <string name="clock_dialog_add">Increase the time period</string>
+    <string name="clock_dialog_modify">Modify the time</string>
+    <string name="clock_dialog_del">Delete the period</string>
+    <string name="clock_dialog_delall">Empty all the time</string>
+    <string name="clock_dialog_warn_invalidtime">Please pay attention to input the correct time format (h:m:s)!</string>
+    <string name="clock_dialog_warn_format">Shutdown time must be greater than the boot time, please pay attention to the format of the input</string>
+    <string name="clock_dialog_warn_timeconfilct">The current time conflict with existing period</string>
+    <string name="clock_dialog_warn_timeinvalid">The interval of the on/off time must be greater than %1$d minutes.</string>
+    <string name="clock_dialog_warn_timenumtransfinite">Switch machine time is beyond maximum number of groups (10), can not continue to add.</string>
+
+    <!-- tools dialog -->
+    <string name="tools_dialog_u_disk_update_header">Please check whether have inserted U disk, whether to update now?</string>
+    <string name="tools_dialog_factory_header">System parameters will be changed after restore factory Settings, whether to need to do this?</string>
+    <string name="tools_dialog_clearallporgram">This operation will clear disk all the programs, sure you want to do this?</string>
+    <string name="tools_dialog_back_warn_success">Configuration file recovery success!</string>
+    <string name="tools_dialog_back_warn_failure">Configuration file recovery failed!</string>
+    <string name="tools_dialog_backup_warn_success">Configuration file backup success!</string>
+    <string name="tools_dialog_backup_warn_failure">Configuration file backup failed!</string>
+    <string name="tools_dialog_u_disk_update_titles">Program update</string>
+    <string name="tools_dialog_u_disk_update_message">Being updated program, please wait a moment…</string>
+    <string name="tools_dialog_u_disk_update_success">Show the update is successful!</string>
+    <string name="tools_dialog_u_disk_update_failure">Program update failed, please try again!</string>
+    <string name="tools_dialog_factory_titles">Restore the factory Settings</string>
+    <string name="tools_dialog_factory_message">Is returning to the factory parameters, please wait……</string>
+    <string name="tools_dialog_factory_success">Factory Settings to restore success!</string>
+    <string name="tools_dialog_boot_update_failure">Boot screen update failed, please try again!</string>
+    <string name="tools_dialog_boot_update_success">Boot screen updated successfully!</string>
+    <string name="tools_dialog_standby_update_failure">Standby screen update failed, please try again!</string>
+    <string name="tools_dialog_standby_update_success">Standby images updated successfully!</string>
+    <string name="tools_dialog_sw_update_failure">Failed to update SW, Please save PostDisplayer.apk to U Disk.</string>
+    <string name="tools_dialog_sw_update_success">SW Update Success!</string>
+    <string name="tools_dialog_cancel_title">Note: this operation will clear the password record state</string>
+    <string name="tools_dialog_cancel_success">Succeed to cancel remember password</string>
+
+    <!-- tools clear pgm -->
+    <string name="tools_dialog_clear_title">Empty the program</string>
+    <string name="tools_dialog_clear_message">Are empty disk program, please wait a moment……</string>
+    <string name="tools_dialog_clear_success">Program has been cleared!</string>
+    <string name="tools_dialog_clear_failure">Show clear failure, please try again!</string>
+    
+    <!-- tools log -->
+    <string name="tools_dialog_log_header">log management</string>
+    <string name="tools_dialog_log_playlog">Recorded broadcast log</string>
+    <string name="tools_dialog_log_commonlog">Recording system log</string>
+
+    <!-- tools checknet -->
+    <string name="tools_dialog_checknet_header">network detection</string>
+    <string name="tools_dialog_checknet_ipadress">I P address:</string>
+    <string name="tools_dialog_checknet_ipstate">IP address connection status:</string>
+    <string name="tools_dialog_checknet_serverstate">Server connection status:</string>
+    <string name="tools_dialog_checknet_testip">Test IP</string>
+    <string name="tools_dialog_checknet_testserver">Test Server</string>
+    <string name="tools_dialog_checknet_message">Are testing network connectivity, please wait……</string>
+    <string name="tools_dialog_checknet_ipsuccess">IP connection success!</string>
+    <string name="tools_dialog_checknet_ipfailure">IP connection failed!</string>
+    <string name="tools_dialog_checknet_serversuccess">The server connection success!</string>
+    <string name="tools_dialog_checknet_serverfailure">Server connection failed!</string>
+
+    <!-- tools apkupdate -->
+    <string name="tools_dialog_apkupdate_title">Is testing a new software version</string>
+    <string name="tools_dialog_apkupdate_message">Please wait……</string>
+    <string name="tools_dialog_apkupdate_currentcode">The current version:</string>
+    <string name="tools_dialog_apkupdate_message_noupdate">,\nIs the latest version, do not need to update!</string>
+    <string name="tools_dialog_apkupdate_update">software update</string>
+    <string name="tools_dialog_apkupdate_findnewcode">, And found that the new version:</string>
+    <string name="tools_dialog_apkupdate_isupdate">, Whether to update?</string>
+    <string name="tools_dialog_apkupdate_downtitle">download is in progress</string>
+    <string name="tools_dialog_apkupdate_noupdate">Temporarily not update</string>
+    <string name="tools_dialog_apkupdate_failure_yzerror">Software update fails, validation errors</string>
+    <string name="tools_dialog_apkupdate_failure_downcancel">Download software update fails, cancelled</string>
+    <string name="tools_dialog_apkupdate_failure_downfailure">Software update fails, download fail</string>
+    <string name="tools_dialog_apkupdate_update_remind">Software update alert </string>
+	<string name="tools_dialog_apkupdate_failure_detectfailure">Failed to detect new SW</string>
+	
+    <!-- osd login -->
+    <string name="login_hint">Please enter password </string>
+    <string name="login_come">enter</string>
+    <string name="login_remembermsg">remember me</string>
+    <string name="login_modifyrmsg">change password</string>
+    <string name="login_dialog_nullmsg">Enter the password cannot be empty</string>
+    <string name="login_dialog_msgerror">Password is not correct, please enter again</string>
+    <string name="login_dialog_writetruemsg">Please enter the correct password</string>
+    <string name="login_dialog_msgmodifysuccess">Modify the success</string>
+     <string name="login_dialog_newpwddifferent">The new password cannot be the same as the original password</string>
+    <string name="login_dialog_retrywrite">The original password is incorrect, please re-enter the password</string>
+    <string name="login_dialog_reset_oldmsg">Old Password</string>
+    <string name="login_dialog_reset_newmsg">new Password</string>
+    
+
+    <!-- other -->
+    <string name="enter">ensure</string>
+    <string name="retry">retry</string>
+    <string name="cancel">cancel</string>
+    <string name="close">close</string>
+    <string name="update">update</string>
+    <string name="wait">please wait…</string>
+
+    <!-- 下载节目进度 -->
+    <string name="downnomaltitle">Download is normal program</string>
+    <string name="downurgenttitle">Download is emergency program</string>
+    
+    <!-- Auto screen off prompt -->
+    <string name="autoscreenoff_prompt_title">Auto Power Off</string>
+    <string name="autoscreenoff_prompt_msg">The current time is in the power off time, the system will be shut down automatically after %1$d minute!\nIf needed, please adjust the auto power on/off time on the server or in the osd menu.</string>
+    <string name="autoscreenoff_prompt_positive">OK</string>
+    
+    <string name="poweroff_prompt_msg">Connected to the server. The server parameters will be effective after reboot.</string>
+    
+    <!-- System Authorization -->
+    <string name="getdevinfo_btntxt">Get Device Info</string>
+    <string name="importauthcode_btntxt">Import Authorization Code</string>
+    <string name="importkey_btntxt">Import Key</string>
+    <string name="updatekey_btntxt">Update Key</string>
+    
+    <string name="unauthorized_msg">Unauthorized Device</string>
+    <string name="auth_success_msg">Authorization Succeeded</string>
+    <string name="keynotexist_info">The key file does not exist. Please import key!</string>
+    <string name="importauth_info">Please import authorization code!</string>
+    
+    <string name="importauth_warning">Please import key first!</string>
+    
+    <string name="auth_mac_info">MAC: </string>
+    <string name="auth_cpuid_info">CPU ID: </string>
+    
+    <string name="dialog_devinfo_title">Device Info</string>
+    <string name="dialog_authcode_title">Import Authorization Code</string>
+    <string name="dialog_importkey_title">Import Key</string>
+    <string name="dialog_updatekey_title">Update Key</string>
+    <string name="dialog_devinfo_postxt">Export device info to Udisk</string>
+    <string name="dialog_devinfo_negtxt">OK</string>
+    <string name="dialog_authcode_postxt">Udisk Import</string>
+    <string name="dialog_authcode_negtxt">Cancel</string>
+    <string name="dialog_importkey_postxt">Udisk Import</string>
+    <string name="dialog_updatekey_postxt">Udisk Update</string>
+    <string name="dialog_key_negtxt">Cancel</string>
+    
+    <string name="pdlg_exportdevinfo_title">Export Device Info</string>
+    <string name="pdlg_importauthcode_title">Import Authorization Code</string>
+    <string name="pdlg_importkey_title">Import Key</string>
+    <string name="pdlg_updatekey_title">Update Key</string>
+    <string name="pdlg_exportdevinfo_msg">Exporting the device info. Please wait a moment.</string>
+    <string name="pdlg_importauthcode_msg">Importing the authorization code. Please wait a moment.</string>
+    <string name="pdlg_importkey_msg">Importing the key. Please wait a moment.</string>
+    <string name="pdlg_updatekey_msg">Updating the key. Please wait a moment.</string>
+    
+    <string name="auth_success_submsg">System will enter the normal state to play automatically after %1$d second(s). Please wait a moment.</string>
+    <string name="auth_failure_submsg">Activation failed. Please import the correct authorization code again!</string>
+    
+    <string name="exportdevinfo_success_title">Succeeded to import the device info!</string>
+    <string name="exportdevinfo_failure_title">Failed to import the device info. Please try it again!</string>
+    <string name="importauthcode_success_title">Succeeded to import the device authorization code!</string>
+    <string name="importauthcode_failure_title">Failed to import the device authorization code. Please try it again!</string>
+    <string name="importkey_success_title">Succeeded to import the key!</string>
+    <string name="importkey_failure_title">Failed to import the key. Please try it again!</string>
+    <string name="updatekey_success_title">Succeeded to update the key!</string>
+    <string name="updatekey_failure_title">Failed to update the key. Please try it again!</string>
+    
+</resources>
