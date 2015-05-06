@@ -150,7 +150,7 @@ public class AuthorizationManager {
 		}
 	}
 	
-	private void stopAuth() {
+	public void stopAuth() {
 		if (mAuthorizationThread != null) {
 			mAuthorizationThread.interrupt();
 			mAuthorizationThread = null;

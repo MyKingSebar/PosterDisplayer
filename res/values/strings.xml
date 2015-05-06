@@ -13,6 +13,8 @@
     <string name="str_off">定时关机了</string>
 
     <!-- 服务器设置 -->
+    <string name="server_weburl">Web URL:&#160;</string>
+    
     <string name="server_ftp_port">Ftp 端口:&#160;</string>
     <string name="server_ftp_id">Ftp 账号:&#160;</string>
     <string name="server_ftp_pwd">Ftp 密码:&#160;</string>
@@ -214,5 +216,7 @@
     <string name="importkey_failure_title">密钥导入失败，请重试！</string>
     <string name="updatekey_success_title">密钥更新成功！</string>
     <string name="updatekey_failure_title">密钥更新失败，请重试！</string>
+    
+    <string name="dlg_title_serverparam">更改服务器参数</string>
 
 </resources>

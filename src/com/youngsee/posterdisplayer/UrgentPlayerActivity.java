@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import com.youngsee.common.Contants;
 import com.youngsee.common.SubWindowInfoRef;
 import com.youngsee.osd.UDiskUpdata;
-import com.youngsee.posterdisplayer.R;
 import com.youngsee.posterdisplayer.PosterApplication;
+import com.youngsee.posterdisplayer.R;
 import com.youngsee.power.PowerOnOffManager;
 import com.youngsee.screenmanager.ProgramFragment;
 
@@ -303,21 +303,21 @@ public class UrgentPlayerActivity extends Activity
         ft.replace(R.id.urgentplayerroot, program, ProgramFragment.URGENT_FRAGMENT_TAG).commitAllowingStateLoss();
     }
     
-    public void playBackgroundMusic()
+    public void startAudio()
     {
         ProgramFragment pf = (ProgramFragment)getFragmentManager().findFragmentByTag(ProgramFragment.URGENT_FRAGMENT_TAG);
         if (pf != null)
         {
-            pf.startPlayMusic();
+            pf.startAudio();
         }
     }
     
-    public void stopBackgroundMusic()
+    public void stopAudio()
     {
         ProgramFragment pf = (ProgramFragment)getFragmentManager().findFragmentByTag(ProgramFragment.URGENT_FRAGMENT_TAG);
         if (pf != null)
         {
-            pf.stopPlayMusic();
+            pf.stopAudio();
         }
     }
     

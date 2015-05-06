@@ -423,7 +423,8 @@ public class ScreenManager
         private boolean normalPgmIsValid()
         {
             /* 若节目超时, 则该节目失效 */
-            return (mNormalProgram != null && mNormalProgram.termTimePoint >= System.currentTimeMillis());
+            return ((mNormalProgram != null)
+            		&& (mNormalProgram.termTimePoint >= System.currentTimeMillis()));
         }
         
         private boolean urgentPgmIsValid()

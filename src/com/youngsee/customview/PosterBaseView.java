@@ -82,6 +82,16 @@ public abstract class PosterBaseView
     public abstract void viewResume();
     public abstract void showMediaList(ArrayList<MediaInfoRef> list);
     
+    public void viewStart()
+    {
+    	logger.i("View start");
+    }
+    
+    public void viewStop()
+    {
+    	logger.i("View stop");
+    }
+    
     protected void decodeGifPicture(final MediaInfoRef picInfo)
     {
         // add decode info to the hash map
@@ -199,8 +209,17 @@ public abstract class PosterBaseView
         {
             return true;
         }
+
+        int startSeconds = PosterApplication.getSecondsInDayByTime(media.starttime);
+        int endSeconds = PosterApplication.getSecondsInDayByTime(media.endtime);
+        if ((startSeconds == -1) || (endSeconds == -1))
+        {
+        	return true;
+        }
         
-        return (PosterApplication.beforeCurrentTime(media.starttime) && PosterApplication.afterCurrentTime(media.endtime));
+        int currentSeconds = PosterApplication.getCurrentSecondsInDay();
+        
+    	return (currentSeconds >= startSeconds) && (currentSeconds <= endSeconds);
     }
     
     public static boolean checkMediaMd5(MediaInfoRef media)

@@ -165,6 +165,11 @@ public class MainWindow extends PosterBaseView
                 if (fromUser && !mIsOnline)
                 {
                     mVideoView.seekTo(progress);
+                    if (!mVideoView.isPlaying())
+                    {
+                    	mVideoView.start();
+                    	resumeUpdateThread();
+                    }
                 }
             }
             
@@ -367,7 +372,7 @@ public class MainWindow extends PosterBaseView
     @Override
     public void viewPause()
     {
-        cancelUpdateThread();
+    	pauseUpdateThread();
         
         if (mVideoView != null && mVideoView.isPlaying())
         {     
@@ -398,7 +403,8 @@ public class MainWindow extends PosterBaseView
             mVideoView.setVisibility(View.VISIBLE);
         }
         
-        if (mVideoView != null && 
+        if (mPlayedTime != -1 &&
+        	mVideoView != null && 
             mPlayList != null && 
             !mPlayList.isEmpty() && 
             mCurrentIdx >= 0 && mCurrentIdx < mPlayList.size() &&
@@ -407,6 +413,8 @@ public class MainWindow extends PosterBaseView
             FileUtils.isExist(mPlayList.get(mCurrentIdx).filePath) &&
             checkMediaMd5(mPlayList.get(mCurrentIdx)))
         {
+        	resetSurfaceView();
+        	
             MediaInfoRef mediaInfo = mPlayList.get(mCurrentIdx);
             mIsOnline = !FileUtils.mediaIsFile(mediaInfo);
             mVideoView.showVideo(mediaInfo);
@@ -416,7 +424,7 @@ public class MainWindow extends PosterBaseView
             LogUtils.getInstance().toAddPLog(Contants.INFO, Contants.PlayMediaStart, mPlayList.get(mCurrentIdx).mid, mViewName, "");
         }
         
-        startUpdateThread();
+        resumeUpdateThread();
     }
     
     @Override
@@ -468,8 +476,6 @@ public class MainWindow extends PosterBaseView
      */
     private void stopPlay()
     {
-        cancelUpdateThread();
-        
         if (mVideoView != null)
         {
             if (mVideoView.isPlaying())
@@ -804,7 +810,7 @@ public class MainWindow extends PosterBaseView
                                     myHandler.sendEmptyMessage(EVENT_HIDE_PROGRESS_BAR);
                                 }
                                 waitForSurfaceViewDone();
-                                informActivityStopMusic();
+                                informStopAudio();
                                 
                                 mIsChangeMedia = false;
                                 mIsMsgHandleDone = false;
@@ -867,10 +873,13 @@ public class MainWindow extends PosterBaseView
                         else if (mIsChangeMedia && FileUtils.mediaIsGifFile(mediaInfo))
                         {
                             mIsChangeMedia = false;
-                            if (mPlayList != null && mLastShowMediaIdx >= 0 && mLastShowMediaIdx < mPlayList.size() && FileUtils.mediaIsVideo(mPlayList.get(mLastShowMediaIdx)))
+                            
+                            if (mPlayList != null && mLastShowMediaIdx >= 0
+                            		&& mLastShowMediaIdx < mPlayList.size()
+                            		&& FileUtils.mediaIsVideo(mPlayList.get(mLastShowMediaIdx)))
                             {
                                 sendHideAllControlMsg();
-                                informActivityPlayMusic();
+                                informStartAudio();
                             }
                             
                             if (displayGif(mediaInfo))
@@ -888,10 +897,12 @@ public class MainWindow extends PosterBaseView
                                 myHandler.sendEmptyMessage(EVENT_HIDE_PROGRESS_BAR);
                             }
                             
-                            if (mPlayList != null && mLastShowMediaIdx >= 0 && mLastShowMediaIdx < mPlayList.size() && FileUtils.mediaIsVideo(mPlayList.get(mLastShowMediaIdx)))
+                            if (mPlayList != null && mLastShowMediaIdx >= 0
+                            		&& mLastShowMediaIdx < mPlayList.size()
+                            		&& FileUtils.mediaIsVideo(mPlayList.get(mLastShowMediaIdx)))
                             {
                                 sendHideAllControlMsg();
-                                informActivityPlayMusic();
+                                informStartAudio();
                             }
                             
                             waitForSurfaceViewDone();
@@ -913,10 +924,12 @@ public class MainWindow extends PosterBaseView
                                 myHandler.sendEmptyMessage(EVENT_HIDE_PROGRESS_BAR);
                             }
                             
-                            if (mPlayList != null && mLastShowMediaIdx >= 0 && mLastShowMediaIdx < mPlayList.size() && FileUtils.mediaIsVideo(mPlayList.get(mLastShowMediaIdx)))
+                            if (mPlayList != null && mLastShowMediaIdx >= 0
+                            		&& mLastShowMediaIdx < mPlayList.size()
+                            		&& FileUtils.mediaIsVideo(mPlayList.get(mLastShowMediaIdx)))
                             {
                                 sendHideAllControlMsg();
-                                informActivityPlayMusic();
+                                informStartAudio();
                             }
                             
                             waitForSurfaceViewDone();
@@ -1086,27 +1099,27 @@ public class MainWindow extends PosterBaseView
             return ret;
         }
         
-        private void informActivityPlayMusic()
+        private void informStartAudio()
         {
             if (mContext instanceof PosterMainActivity)
             {
-                ((PosterMainActivity) mContext).playBackgroundMusic();
+                ((PosterMainActivity) mContext).startAudio();
             }
             else if (mContext instanceof UrgentPlayerActivity)
             {
-                ((UrgentPlayerActivity) mContext).playBackgroundMusic();
+                ((UrgentPlayerActivity) mContext).startAudio();
             }
         }
         
-        private void informActivityStopMusic()
+        private void informStopAudio()
         {
             if (mContext instanceof PosterMainActivity)
             {
-                ((PosterMainActivity) mContext).stopBackgroundMusic();
+                ((PosterMainActivity) mContext).stopAudio();
             }
             else if (mContext instanceof UrgentPlayerActivity)
             {
-                ((UrgentPlayerActivity) mContext).stopBackgroundMusic();
+                ((UrgentPlayerActivity) mContext).stopAudio();
             }
         }
         
@@ -1120,7 +1133,7 @@ public class MainWindow extends PosterBaseView
             }
         }
     }
-    
+
     @SuppressLint("HandlerLeak")
     final Handler myHandler = new Handler()
     {

@@ -12,11 +12,13 @@
     <string name="str_on">The timing boot</string>
     <string name="str_off">The regular shutdown</string>
     
-     <!-- server settings -->
-	<string name="server_ftp_port">Ftp Port:</string>
-	<string name="server_ftp_id">Ftp ID:</string>
-	<string name="server_ftp_pwd">Ftp Password:</string>
-	<string name="server_ntp_port">Ntp Port:</string>
+    <!-- server settings -->
+    <string name="server_weburl">Web URL:&#160;</string>
+     
+    <string name="server_ftp_port">Ftp Port:&#160;</string>
+    <string name="server_ftp_id">Ftp ID:&#160;</string>
+    <string name="server_ftp_pwd">Ftp Password:&#160;</string>
+    <string name="server_ntp_port">Ntp Port:&#160;</string>
 
     <!-- system tools -->
     <string name="tools_format_disk">Empty disk program</string>
@@ -214,5 +216,7 @@
     <string name="importkey_failure_title">Failed to import the key. Please try it again!</string>
     <string name="updatekey_success_title">Succeeded to update the key!</string>
     <string name="updatekey_failure_title">Failed to update the key. Please try it again!</string>
+    
+    <string name="dlg_title_serverparam">Change Server Parameter</string>
     
 </resources>

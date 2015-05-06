@@ -4,6 +4,8 @@ import com.youngsee.authorization.AuthorizationManager.OnAuthStatusListener;
 import com.youngsee.common.FileUtils;
 import com.youngsee.posterdisplayer.PosterApplication;
 import com.youngsee.posterdisplayer.R;
+import com.youngsee.webservices.SysParam;
+import com.youngsee.webservices.WsClient;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,8 +20,10 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +48,9 @@ public class AuthorizationActivity extends Activity implements OnClickListener {
 	private ImageView mImgvImpOrUpdKey = null;
 	
 	private int mInfoDlgViewResId = -1;
+	
+	private ImageView mImgvSettings = null;
+	private ImageView mImgvServerParam = null;
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -71,6 +78,11 @@ public class AuthorizationActivity extends Activity implements OnClickListener {
 		mImgvImportAuthCode.setOnClickListener(this);
 		mImgvImpOrUpdKey = (ImageView)findViewById(R.id.imgv_auth_imtorupdkey);
 		mImgvImpOrUpdKey.setOnClickListener(this);
+		
+		mImgvSettings = (ImageView)findViewById(R.id.imgv_auth_settings);
+		mImgvSettings.setOnClickListener(this);
+		mImgvServerParam = (ImageView)findViewById(R.id.imgv_auth_serverparam);
+		mImgvServerParam.setOnClickListener(this);
 		
 		initView();
 		
@@ -143,6 +155,12 @@ public class AuthorizationActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		mInfoDlgViewResId = v.getId();
 		switch (mInfoDlgViewResId) {
+		case R.id.imgv_auth_settings:
+			switchToSettings();
+			break;
+		case R.id.imgv_auth_serverparam:
+			setServerParam();
+			break;
 		case R.id.imgv_auth_getdevinfo:
 			getDevInfo();
 			break;
@@ -153,6 +171,58 @@ public class AuthorizationActivity extends Activity implements OnClickListener {
 			importOrUpdateKey();
 			break;
 		}
+	}
+	
+	private void switchToSettings() {
+		PosterApplication.startApplication(this, "com.android.settings");
+	}
+	
+	private void showServerParamDialog(final SysParam sysparam) {
+		String oldweburl = null;
+		if (sysparam != null && sysparam.serverSet != null) {
+            if (sysparam.serverSet.get("weburl") != null) {
+            	oldweburl = new String(sysparam.serverSet.get("weburl"));
+            }
+        }
+
+		if (oldweburl != null && oldweburl.endsWith("asmx")
+				&& oldweburl.length() > WsClient.SERVICE_URL_SUFFIX.length()) {
+			oldweburl = oldweburl.substring(0,
+					(oldweburl.length() - WsClient.SERVICE_URL_SUFFIX.length()));
+		}
+		
+		final View dlgview = LayoutInflater.from(this).inflate(R.layout.serverparam_dialog, null);
+		final EditText etxtWebUrl = (EditText)dlgview.findViewById(R.id.etxt_auth_weburl);
+		etxtWebUrl.setText(oldweburl != null ? oldweburl : "");
+		
+		final String saveweburl = etxtWebUrl.getText().toString();
+		
+		AlertDialog.Builder serverParamDialog = new AlertDialog.Builder(this);
+		serverParamDialog.setTitle(R.string.dlg_title_serverparam);
+		serverParamDialog.setView(dlgview);
+		serverParamDialog.setPositiveButton(R.string.enter,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String newweburl = etxtWebUrl.getText().toString();
+						if (!newweburl.equals(saveweburl)) {
+							if (newweburl != null && !"".equals(newweburl) && !newweburl.endsWith("asmx")) {
+								newweburl = newweburl + WsClient.SERVICE_URL_SUFFIX;
+					        }
+							sysparam.serverSet.put("weburl", newweburl != null ? newweburl : "");
+							
+							PosterApplication.getInstance().saveSysParam(sysparam);
+							
+							WsClient.getInstance().osdChangeServerConfig();
+				        }
+					}
+				});
+		serverParamDialog.setNegativeButton(R.string.cancel, null);
+		serverParamDialog.create().show();
+    } 
+	
+	private void setServerParam() {
+		showServerParamDialog(PosterApplication.getInstance().getSysParam(false, false));
 	}
 	
 	private void updateMsgOnAuthSucceeded(int sec) {
@@ -222,6 +292,9 @@ public class AuthorizationActivity extends Activity implements OnClickListener {
 					public void onCompleted() {
 						if (AuthorizationManager.getInstance().checkAuthStatus(
 								AuthorizationManager.MODE_DELAY_LOCAL)) {
+							if (AuthorizationManager.getInstance() != null) {
+								AuthorizationManager.getInstance().stopAuth();
+							}
 							mTxtvMainInfo.setTextColor(Color.GREEN);
 							mTxtvMainInfo.setText(getResString(R.string.auth_success_msg));
 							mTxtvSubInfo.setText(String.format(

@@ -44,6 +44,7 @@
 
 -keep class it.sauronsoftware.ftp4j.**
 -keep class org.apache.** {*;}
+-keep class org.bouncycastle.** {*;}
 -keep class org.kxml2.** {}
 -keep class org.ksoap2.** {*;}
 -keep class org.xmlpull.v1.** {*;}

@@ -22,6 +22,7 @@ import com.youngsee.common.Logger;
 import com.youngsee.common.MediaInfoRef;
 import com.youngsee.common.SubWindowInfoRef;
 import com.youngsee.common.TypefaceManager;
+import com.youngsee.customview.AudioView;
 import com.youngsee.customview.DateTimeView;
 import com.youngsee.customview.GalleryView;
 import com.youngsee.customview.PosterBaseView;
@@ -67,12 +68,6 @@ public class ProgramFragment extends Fragment
     private int                         mBgScreenXPos       = 0;
     private int                         mBgScreenYPos       = 0;
     private MediaInfoRef                mBgImgInfo          = null;
-    
-    // 背景音乐信息
-    private int                         mPlayedTime         = -1;
-    private int                         mCurrentIdx         = -1;
-    private MediaPlayer                 mMediaPlayer        = null;
-    private ArrayList<MediaInfoRef>     mBgMusicFileList    = null;
     
     // 主屏幕信息
     private int                         mMainScreenWidth    = 0;
@@ -178,15 +173,6 @@ public class ProgramFragment extends Fragment
                     }
                     continue;
                 }
-                else if (wndType.contains("Audio"))
-                {
-                    // 背景音乐
-                    if (subWndInfo.getSubWndMediaList() != null)
-                    {
-                        mBgMusicFileList = new ArrayList<MediaInfoRef>(subWndInfo.getSubWndMediaList());
-                    }
-                    continue;
-                }
                 else if (wndType.contains("Main"))
                 {
                     mMainScreenXPos = xPos;
@@ -195,6 +181,12 @@ public class ProgramFragment extends Fragment
                     mMainScreenHeight = height;
                     mMainWindow = new MainWindow(getActivity(), wndName);
                     continue;
+                }
+                else if (wndType.contains("Audio"))
+                {
+                    width = 0;
+                    height = 0;
+                	tempSubWnd = new SubWindow(wndName, new AudioView(getActivity(), wndName));
                 }
                 else if (wndType.contains("Image"))
                 {
@@ -272,11 +264,6 @@ public class ProgramFragment extends Fragment
             
             if (mNeedResume)
             {
-	            if (mBgMusicFileList != null)
-	            {
-	                resumeMusic();
-	            }
-	            
 	            if (mMainWindow != null)
 	            {
 	                mMainWindow.viewResume();
@@ -305,11 +292,7 @@ public class ProgramFragment extends Fragment
     {
         mHandler.removeCallbacks(rSetWndBgDelay);
         mHandler.removeCallbacks(rSetStandbyDelay);
-        if (mBgMusicFileList != null)
-        {
-            pauseMusic();
-        }
-        
+
         if (mMainWindow != null)
         {
             mMainWindow.viewPause();
@@ -340,7 +323,6 @@ public class ProgramFragment extends Fragment
     {
         mHandler.removeCallbacks(rSetWndBgDelay);
         mHandler.removeCallbacks(rSetStandbyDelay);
-        cancelPlayMusic();
         
         if (mMainWindow != null)
         {
@@ -673,152 +655,34 @@ public class ProgramFragment extends Fragment
         return srcBmp;
     }
 
-    private void PlayMusic(String path)
+    public void startAudio()
     {
-        if (path == null)
+    	if (mSubWndCollection != null)
         {
-            return;
-        }
-        
-        // Make Sure Just one Media Player in Client
-        if (mMediaPlayer == null)
-        {
-            mMediaPlayer = new MediaPlayer();
-            
-            mMediaPlayer.setOnPreparedListener(new OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp)
+            for (SubWindow wnd : mSubWndCollection)
+            {
+                if (wnd.getWindowName().startsWith("Audio"))
                 {
-                    mMediaPlayer.start();
+                	wnd.getContentView().viewStart();
                 }
-            });
-            
-            mMediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp)
+            }
+        }
+    }
+    
+    public void stopAudio()
+    {
+    	if (mSubWndCollection != null)
+        {
+            for (SubWindow wnd : mSubWndCollection)
+            {
+                if (wnd.getWindowName().startsWith("Audio"))
                 {
-                    loadNextMusic();
+                	wnd.getContentView().viewStop();
                 }
-            });
-            
-            mMediaPlayer.setOnErrorListener(new OnErrorListener() {
-                @Override
-                public boolean onError(MediaPlayer mp, int what, int extra)
-                {
-                    stopPlayMusic();
-                    loadNextMusic();
-                    return true;
-                }
-            });
-        }
-        
-        try
-        {
-            stopPlayMusic();
-            mMediaPlayer.reset(); // 重置
-            mMediaPlayer.setDataSource(path); // 设置数据源
-            mMediaPlayer.prepareAsync(); // 异步准备
-            FileUtils.updateFileLastTime(path);
-        }
-        catch (IllegalArgumentException e)
-        {
-            e.printStackTrace();
-        }
-        catch (SecurityException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-    
-    private void loadNextMusic()
-    {
-        if (mBgMusicFileList == null)
-        {
-            return;
-        }
-        
-        MediaInfoRef mediaInfo = null;
-        for (int i = 0; i < mBgMusicFileList.size(); i++)
-        {
-            if (++mCurrentIdx >= mBgMusicFileList.size())
-            {
-                mCurrentIdx = 0;
-            }
-            
-            mediaInfo = mBgMusicFileList.get(mCurrentIdx);
-            if (FileUtils.mediaIsFile(mediaInfo) && FileUtils.isExist(mediaInfo.filePath))
-            {
-                PlayMusic(mediaInfo.filePath);
-                break;
             }
         }
     }
-    
-    private void pauseMusic()
-    {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying())
-        {
-            mPlayedTime = mMediaPlayer.getCurrentPosition();
-            mMediaPlayer.pause();
-        }
-    }
-    
-    private void resumeMusic()
-    {
-        if (mMediaPlayer != null && !mMediaPlayer.isPlaying())
-        {
-            if (mPlayedTime > 0)
-            {
-                mMediaPlayer.seekTo(mPlayedTime);
-            }
-            mMediaPlayer.start();
-            mPlayedTime = -1;
-        }
-        else
-        {
-            loadNextMusic();
-        }
-    }
-    
-    public void startPlayMusic()
-    {
-        if (mBgMusicFileList == null || (mMediaPlayer != null && mMediaPlayer.isPlaying()))
-        {
-            return;
-        }
-        
-        loadNextMusic();
-    }
-    
-    public void stopPlayMusic()
-    {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying())
-        {
-            mMediaPlayer.stop();
-        }
-    }
-    
-    private void cancelPlayMusic()
-    {
-        if (mMediaPlayer != null)
-        {
-            if (mMediaPlayer.isPlaying())
-            {
-                mMediaPlayer.stop();
-            }
-            mMediaPlayer.reset();
-            mMediaPlayer.release();
-            mMediaPlayer = null;
-        }
-    }
+
     /**
      * 如果背景图片不存在，则轮循检测图片文件是否下载完成.
      */

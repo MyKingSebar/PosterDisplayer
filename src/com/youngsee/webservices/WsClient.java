@@ -514,7 +514,12 @@ public class WsClient
         if (scheduList != null && scheduList.Schedule != null)
         {
             // download template
-            downloadProgramList(scheduList);
+            if (downloadProgramList(scheduList) == false)
+            {
+            	logger.e("CPE Emergency Template Download Failed[Invalid Terminal]");
+            	delTempFile();
+            	return 4;
+            }
         }
         
         // move temp file to program path
@@ -588,7 +593,12 @@ public class WsClient
         if (scheduList != null && scheduList.Schedule != null)
         {
             // download template
-            downloadProgramList(scheduList);
+            if (downloadProgramList(scheduList) == false)
+            {
+            	logger.e("CPE Normal Template Download Failed[Invalid Terminal]");
+            	delTempFile();
+            	return 4;
+            }
         }
         
         // move temp file to program path
@@ -705,11 +715,11 @@ public class WsClient
     /**************************************************
      * download the XML file which is defined program *
      **************************************************/
-    private void downloadProgramList(ScheduleLists scheduList)
+    private boolean downloadProgramList(ScheduleLists scheduList)
     {
         if (scheduList == null || scheduList.Schedule == null)
         {
-            return;
+            return false;
         }
         
         Schedules schedule = null;
@@ -759,11 +769,16 @@ public class WsClient
                     strVerifyCode = program.Program.get("verify");
                     if (strProgramId != null && strProgramName != null && strVerifyCode != null)
                     {
-                        templateDownload(strProgramId, strProgramName, strVerifyCode);
+                        if (templateDownload(strProgramId, strProgramName, strVerifyCode) == false)
+                        {
+                        	return false;
+                        }
                     }
                 }
             }
         }
+        
+        return true;
     }
     
     /**************************************************
@@ -793,6 +808,17 @@ public class WsClient
             FileUtils.delFile(file);
         }
         FileUtils.writeSDFileData(strFilePathName, message.getBytes(), false);
+    }
+    
+    private boolean delTempFile()
+    {
+    	StringBuilder sb = new StringBuilder();
+        sb.append(PosterApplication.getProgramPath());
+        sb.append(File.separator);
+        sb.append("tmpDowload");
+        
+        FileUtils.delDir(sb.toString());
+    	return true;
     }
     
     /**************************************************
@@ -900,6 +926,7 @@ public class WsClient
         String serverWebUrl = getServerURL();
         String soapAction = NAME_SPACE + methodName;
         KeepAliveHttpTransportSE transport = null;
+        SoapSerializationEnvelope envelope = null;
         
         if (serverWebUrl == null)
         {
@@ -930,7 +957,7 @@ public class WsClient
             }
             
             // 生成调用WebService方法的SOAP请求信息,并指定SOAP的版本
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             
             // 设置Envelope属性
             envelope.dotNet = true; // 支持.Net开发的WebService
@@ -948,23 +975,31 @@ public class WsClient
             // debug code
             logger.d(((SoapObject) envelope.bodyIn).getProperty(0).toString());
         }
-        catch (IOException e)
-        {
-            retSoapObj = null;
-            logger.d("createSoapSession(): IO exception.");
-            e.printStackTrace();
-        }
-        catch (XmlPullParserException e)
-        {
-            retSoapObj = null;
-            logger.d("createSoapSession(): xml pull parser exception.");
-            e.printStackTrace();
-        }
         catch (Exception e)
         {
-            retSoapObj = null;
-            logger.e("createSoapSession() catch a exception, the error message is: " + e.toString());
+        	logger.e("createSoapSession() catch a exception, the error message is: " + e.toString());
             e.printStackTrace();
+            
+        	if (transport != null)
+        	{
+        		logger.i("retry to createSoapSession()");
+	            try {
+					transport.call(soapAction, envelope);
+					
+					// 获取返回的数据
+		            retSoapObj = (SoapObject) envelope.bodyIn;
+		            
+		            // debug code
+		            logger.d(((SoapObject) envelope.bodyIn).getProperty(0).toString());
+				}
+	            catch (Exception er)
+	            {
+					er.printStackTrace();
+					retSoapObj = null;
+		            logger.e("retry createSoapSession() catch a exception, the error message is: " + er.toString());
+		            er.printStackTrace();
+				}
+        	}
         }
         finally
         {
@@ -1354,7 +1389,6 @@ public class WsClient
         {
             logger.i("New ClientFSM thread, id is: " + currentThread().getId());
             int nInterval = 0;
-            String serverUrl = null;
             
             while (mIsRun)
             {
@@ -1372,7 +1406,7 @@ public class WsClient
                         logger.i("Server URL has been changed, retry to connect with new server.");
                     }
                     
-                    if ((serverUrl = getServerURL()) == null)
+                    if (getServerURL() == null)
                     {
                         logger.w("server URL is null, please set the server URL firstly.");
                         Thread.sleep(1000);
@@ -1385,13 +1419,6 @@ public class WsClient
                         Thread.sleep(1000);
                         continue;
                     }
-                    /*else if (!PosterApplication.getInstance().httpServerIsReady(serverUrl))
-                    {
-                        mState = STATE_IDLE;
-                        logger.w("Server is unreachable, please check whether the link is connected.");
-                        Thread.sleep(1000);
-                        continue;
-                    }*/
                     
                     switch (mState)
                     {
@@ -1404,14 +1431,18 @@ public class WsClient
                         break;
                     
                     case STATE_ONLINE:
-                        if (false == heartbeat() && ++mHeartbeatFailTimes > HEARTBEAT_MAX_FAIL_TIMES)
+                        if (false == heartbeat())
                         {
                             // 如果心跳失败次数超过3次，则转到IDLE状态
-                            mState = STATE_IDLE;
-                            logger.w("Heart beat failed times reach the limit, go to IDLE state.");
+                        	if (++mHeartbeatFailTimes > HEARTBEAT_MAX_FAIL_TIMES)
+                        	{
+	                            mState = STATE_IDLE;
+	                            logger.w("Heart beat failed times reach the limit, go to IDLE state.");
+                        	}
                         }
                         else
                         {
+                        	mHeartbeatFailTimes = 0;
                             nInterval = PosterApplication.getInstance().getSysParam(false, false).cycleTimevalue;
                             nInterval = (nInterval > 1) ? (nInterval * 1000) : 1000;
                             Thread.sleep(nInterval);

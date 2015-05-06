@@ -39,6 +39,7 @@ import com.youngsee.common.FileUtils;
 import com.youngsee.common.Md5;
 import com.youngsee.common.RuntimeExec;
 import com.youngsee.osd.OsdSubMenuFragment;
+import com.youngsee.posterdisplayer.LogManager;
 import com.youngsee.posterdisplayer.PosterApplication;
 import com.youngsee.posterdisplayer.PosterOsdActivity;
 import com.youngsee.power.PowerOnOffManager;
@@ -189,11 +190,25 @@ public class XmlCmdParse
                 break;
             
             case XmlCmdInfoRef.CMD_PTL_DOWNPLAYLIST: // download Normal PlayList
-                result = WsClient.getInstance().normalPlayListDownload();
+            	if (WsClient.getInstance().normalPlayListDownload() != 0)
+            	{
+                    result = 1;
+            	}
+            	else
+            	{
+            		result = 0;
+            	}
                 break;
             
             case XmlCmdInfoRef.CMD_PTL_PLAYLIST: // download Emergency PlayList
-                result = WsClient.getInstance().emergencyPlayListDownload();
+                if (WsClient.getInstance().emergencyPlayListDownload() != 0)
+                {
+                    result = 1;
+            	}
+            	else
+            	{
+            		result = 0;
+            	}
                 break;
             
             case XmlCmdInfoRef.CMD_PTL_SETPW: // 设置开关机
@@ -298,6 +313,9 @@ public class XmlCmdParse
                         } 
                     });
                 }
+                
+                LogManager.getInstance().uploadLog(LogManager.LOGTYPE_NORMAL, 0);
+
                 break;
                 
             case XmlCmdInfoRef.CMD_PTL_SETBRI:  // 设置屏幕亮度
@@ -517,6 +535,9 @@ public class XmlCmdParse
                         } 
                     });
                 }
+                
+                LogManager.getInstance().uploadLog(LogManager.LOGTYPE_NORMAL, 0);
+                
                 break;
                 
             case XmlCmdInfoRef.CMD_PTL_CPEPLAYLOGFTPUP:// 上传播放日志
@@ -744,6 +765,9 @@ public class XmlCmdParse
                         PosterApplication.getInstance().saveSysParam(sysParam);
                     }
                 }
+                
+                LogManager.getInstance().uploadLog(LogManager.LOGTYPE_PERIOD, 60*1000);
+                
                 break;
                 
             case XmlCmdInfoRef.CMD_PTL_FORBIDDOWNLOADTIME:// 禁止下载时间段

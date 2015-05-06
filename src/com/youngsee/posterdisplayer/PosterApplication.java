@@ -127,9 +127,9 @@ public class PosterApplication extends Application
     private AlarmManager mAlarmManager = null;
     
     private final String SYSPROP_HWROTATION_CLASS = "android.os.SystemProperties";
-	private final String SYSPROP_HWROTATION_GETMETHOD = "getInt";
-	private final String SYSPROP_HWROTATION = "persist.sys.hwrotation";
-	private final int SYSPROP_HWROTATION_DEFAULT = -1;
+    private final String SYSPROP_HWROTATION_GETMETHOD = "getInt";
+    private final String SYSPROP_HWROTATION = "persist.sys.hwrotation";
+    private final int SYSPROP_HWROTATION_DEFAULT = -1;
     
     public static PosterApplication getInstance()
     {
@@ -167,7 +167,7 @@ public class PosterApplication extends Application
         
         mAlarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
     }
-    
+
     public void initAppParam()
     {
         getEthMacAddress();
@@ -889,7 +889,7 @@ public class PosterApplication extends Application
         sysParam.syspasswdvalue = "";
         sysParam.brightnessvalue = 60;
         sysParam.volumevalue = 60;
-        sysParam.swVervalue = "4.1.0.0";
+        sysParam.swVervalue = "4.0.1.0";
         sysParam.hwVervalue = "1.0.0.0";
         sysParam.kernelvervalue = getKernelVersion();
         sysParam.cfevervalue = android.os.Build.VERSION.RELEASE;
@@ -1988,6 +1988,23 @@ public class PosterApplication extends Application
         time.parse(sb.toString());
         
         return (time.toMillis(false) >= System.currentTimeMillis());
+    }
+    
+    public static int getCurrentSecondsInDay()
+    {
+    	Time t = new Time();
+        t.setToNow();
+        return (t.hour*3600)+(t.minute*60)+t.second;
+    }
+    
+    public static int getSecondsInDayByTime(String t)
+    {
+    	String strTime[] = t.split(":");
+    	if (strTime.length != 3)
+    	{
+    		return -1;
+    	}
+    	return (Integer.parseInt(strTime[0])*3600)+(Integer.parseInt(strTime[1])*60)+Integer.parseInt(strTime[2]);
     }
     
     /**

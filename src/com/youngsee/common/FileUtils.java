@@ -562,6 +562,32 @@ public class FileUtils
         return file.delete();
     }
     
+    public static boolean delFile(String path)
+    {
+    	if (!isExist(path))
+    	{
+    		return false;
+    	}
+    	
+    	File file = new File(path);
+    	return file.delete();
+    }
+    
+    public static boolean isEmpty(String dir)
+    {
+    	File dirfile = new File(dir);
+        
+        if (dirfile == null || !dirfile.exists() || !dirfile.isDirectory()) {
+            return false;
+        }
+        
+        if (dirfile.listFiles().length > 0) {
+        	return false;
+        }
+        
+        return true;
+    }
+    
     /**
      * 拷贝一个文件,srcFile源文件，destFile目标文件
      * 

@@ -670,7 +670,7 @@ public class PictureView extends PosterBaseView
                 int nPicAnimaId = msg.getData().getInt("Animation");
                 BitmapDrawable bdPic = new BitmapDrawable(mContext.getResources(), currentPicBmp);
                 setPicImgAnimation(mImgSwitcher, nPicAnimaId);
-                mImgSwitcher.setBackground(mLastBitmapDrawable);
+                mImgSwitcher.setBackground(null);
                 mImgSwitcher.setImageDrawable(bdPic);
                 mLastBitmapDrawable = bdPic;
                 return;

@@ -22,6 +22,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
@@ -77,10 +78,10 @@ public class VideoView extends SurfaceView implements MediaPlayerControl
                                                                                       // while preparing
                                                                                       
     private OnCompletionListener           mOnCompletionListener    = null;
-    private MediaPlayer.OnPreparedListener mOnPreparedListener      = null;
+    private OnPreparedListener             mOnPreparedListener      = null;
     private OnErrorListener                mOnErrorListener         = null;
     private OnViewSizeChangeListener       mOnSizeChangeListener    = null;
-    
+
     public void setVideoScale(int width, int height)
     {
         LayoutParams lp = getLayoutParams();
@@ -93,7 +94,7 @@ public class VideoView extends SurfaceView implements MediaPlayerControl
     {
         public void OnViewSizeChange();
     }
-    
+
     public void setViewSizeChangeListener(OnViewSizeChangeListener l)
     {
         mOnSizeChangeListener = l;
@@ -105,7 +106,7 @@ public class VideoView extends SurfaceView implements MediaPlayerControl
      * @param l
      *            The callback that will be run
      */
-    public void setOnPreparedListener(MediaPlayer.OnPreparedListener l)
+    public void setOnPreparedListener(OnPreparedListener l)
     {
         mOnPreparedListener = l;
     }
@@ -294,7 +295,7 @@ public class VideoView extends SurfaceView implements MediaPlayerControl
         if (FileUtils.isExist(mir.filePath))
         {
             FileUtils.updateFileLastTime(mir.filePath);
-            setVideoURI(Uri.parse(mir.filePath), mir.vType);  
+            setVideoURI(Uri.parse(mir.filePath), mir.vType);
         }
     }
     

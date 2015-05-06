@@ -71,10 +71,10 @@ public class PosterMainActivity extends Activity {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		PosterApplication.setSystemBarVisible(this, false);
-		setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
 
 		// 初始化背景颜色
@@ -82,14 +82,11 @@ public class PosterMainActivity extends Activity {
 
 		INSTANCE = this;
 
-		logger.d("====>PosterMainActivity onCreate: " + getIntent().toString());
+        logger.d("====>PosterMainActivity onCreate: " + getIntent().toString());
 
 		if (mWklk == null) {
 			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			mWklk = pm
-					.newWakeLock(
-							(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP),
-							"PosterMain");
+            mWklk = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "PosterMain");
 		}
 
 		// 唤醒屏幕
@@ -251,6 +248,10 @@ public class PosterMainActivity extends Activity {
 		
 		if (AuthorizationManager.getInstance() != null) {
 			AuthorizationManager.getInstance().destroy();
+		}
+		
+		if (LogManager.getInstance() != null) {
+			LogManager.getInstance().destroy();
 		}
 
 		// 终止定时器
@@ -419,19 +420,19 @@ public class PosterMainActivity extends Activity {
 		}
 	}
 
-	public void playBackgroundMusic() {
+	public void startAudio() {
 		ProgramFragment pf = (ProgramFragment) getFragmentManager()
 				.findFragmentByTag(ProgramFragment.NORMAL_FRAGMENT_TAG);
 		if (pf != null) {
-			pf.startPlayMusic();
+			pf.startAudio();
 		}
 	}
 
-	public void stopBackgroundMusic() {
+	public void stopAudio() {
 		ProgramFragment pf = (ProgramFragment) getFragmentManager()
 				.findFragmentByTag(ProgramFragment.NORMAL_FRAGMENT_TAG);
 		if (pf != null) {
-			pf.stopPlayMusic();
+			pf.stopAudio();
 		}
 	}
 

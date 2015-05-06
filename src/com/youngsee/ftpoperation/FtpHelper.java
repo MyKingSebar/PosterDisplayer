@@ -200,7 +200,7 @@ public class FtpHelper
                         mFileInfo = mWaitForUlQueue.removeFirst();
                     }
                     
-                    if (!mFileInfo.isReachMaxRetryTimes(MAX_RETRY_TIMES));
+                    if (!mFileInfo.isReachMaxRetryTimes(MAX_RETRY_TIMES))
                     {
                         if (!uploadFile(mFileInfo))
                         {
@@ -320,7 +320,7 @@ public class FtpHelper
             File lFile = new File(FileUtils.formatPath4File(localFolderPath));
             if (!lFile.exists() || !lFile.isFile())
             {
-                logger.e("upload file is invalid.");
+                logger.e("upload file is invalid: "+lFile.getAbsolutePath());
                 closeConnection(mClient);
                 return false;
             }
@@ -782,7 +782,7 @@ public class FtpHelper
                         mCurrentFileInfo = mWaitForDlQueue.removeFirst();
                     }
                     
-                    if (!mCurrentFileInfo.isReachMaxRetryTimes(MAX_RETRY_TIMES));
+                    if (!mCurrentFileInfo.isReachMaxRetryTimes(MAX_RETRY_TIMES))
                     {
                         if (!downloadFile(mCurrentFileInfo))
                         {
