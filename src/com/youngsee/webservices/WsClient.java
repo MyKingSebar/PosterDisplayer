@@ -22,7 +22,6 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.KeepAliveHttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.annotation.SuppressLint;
@@ -244,7 +243,7 @@ public class WsClient
             logger.e("CPE Authentication ERROR[response length < 99]");
             return false;
         }
-        
+
         // Parser the Response
         XmlParser xml = new XmlParser();
         InputStream xmlIs = new ByteArrayInputStream(strResponse.getBytes());
@@ -499,7 +498,7 @@ public class WsClient
             String remoteMd5 = getSchListMd5Value(strResponse.getBytes());
             if (localMd5.equals(remoteMd5))
             {
-                logger.e("Emgcy playlist already is newlest, didn't need to update.");
+                logger.e("Emergency playlist already is newlest, didn't need to update.");
                 return 0;
             }
         }

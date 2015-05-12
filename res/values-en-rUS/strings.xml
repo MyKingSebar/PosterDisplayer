@@ -40,7 +40,8 @@
     <string name="about_kernelver">The kernel version number:</string>
     <string name="about_swver">Software version number:</string>
     <string name="about_hwver">The hardware version number:</string>
-    <string name="about_mac"> M	A 	C 	address:</string>
+    <string name="about_id">Terminal I D:</string>
+    <string name="about_mac">M A C address:</string>
     <string name="about_connStatus">Network connection state:</string>
     <string name="about_certNum">Network access license:</string>
     <string name="about_termGrp">Terminal belong to group:</string>
@@ -48,7 +49,7 @@
     <string name="title_activity_normal_displayer">NormalDisplayerActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="about_ip">I   P      address：</string>
+    <string name="about_ip">I P address:</string>
 
     <!-- clock -->
     <string name="clock_title_top">(Long period to add/change/remove)</string>

@@ -83,6 +83,7 @@ public class AudioView extends PosterBaseView
     @Override
     public void viewDestroy()
     {
+    	mMediaList = null;
         cancelUpdateThread();
         destroyAudio();
     }
@@ -209,7 +210,12 @@ public class AudioView extends PosterBaseView
 
         public void cancel()
         {
+        	logger.i("Cancels the audio thread.");
             mIsRun = false;
+            if (isPaused())
+            {
+            	onResume();
+            }
             this.interrupt();
         }
         
@@ -248,6 +254,21 @@ public class AudioView extends PosterBaseView
             {
                 try
                 {
+                	synchronized (mPauseLock)
+                    {
+                        if (mPauseFlag)
+                        {
+                            try
+                            {
+                                mPauseLock.wait();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                	
                     if (mMediaList == null)
                     {
                         logger.i("mMediaList is null, thread exit.");
@@ -264,21 +285,6 @@ public class AudioView extends PosterBaseView
                         return;
                     }
                     
-                    synchronized (mPauseLock)
-                    {
-                        if (mPauseFlag)
-                        {
-                            try
-                            {
-                                mPauseLock.wait();
-                            }
-                            catch (Exception e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-
 					if (mIsChangeMedia) {
 						// Get the Media Info
 						mediaInfo = mMediaList.get(mCurrentIndex);

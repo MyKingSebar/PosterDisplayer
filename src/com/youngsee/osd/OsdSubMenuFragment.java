@@ -110,6 +110,7 @@ public class OsdSubMenuFragment extends Fragment
     private TextView           about_kernelver          = null;
     private TextView           about_swVer              = null;
     private TextView           about_hwVer              = null;
+    private TextView           about_id                 = null;
     private TextView           about_MAC                = null;
     private TextView           about_IP                 = null;
     private TextView           about_termGrp            = null;
@@ -227,7 +228,6 @@ public class OsdSubMenuFragment extends Fragment
             } else {
             	PosterMainActivity.INSTANCE.checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
             }
-        	//PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
         }
     }
     
@@ -771,6 +771,7 @@ public class OsdSubMenuFragment extends Fragment
         about_kernelver = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_kernelver);
         about_swVer = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_swVer);
         about_hwVer = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_hwVer);
+        about_id = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_id);
         about_MAC = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_MAC);
         about_IP = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_IP);
         about_termGrp = (TextView) mMenus[PosterOsdActivity.OSD_ABOUT_ID].findViewById(R.id.about_termGrp);
@@ -794,7 +795,8 @@ public class OsdSubMenuFragment extends Fragment
         }
         about_diskStatus.setText(FileUtils.getDiskUseSpace() + "/" + FileUtils.getDiskSpace());
         about_connStatus.setText(WsClient.getInstance().isOnline() ? ("已连接上服务器") : ("未连接上服务器"));
-        about_MAC.setText(PosterApplication.getEthFormatMac());
+        about_id.setText(PosterApplication.getCpuId().toUpperCase());
+        about_MAC.setText(PosterApplication.getEthFormatMac().toUpperCase());
         about_IP.setText(PosterApplication.getLocalIpAddress());
     }
     

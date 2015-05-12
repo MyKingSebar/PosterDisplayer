@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_about" >
-
+    
     <TextView
         style="@style/title_style"
         android:layout_width="match_parent"
@@ -15,21 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/half_transparent"
         android:gravity="center"
+        android:background="@color/half_transparent"
         android:orientation="horizontal" >
         
-        <ScrollView
+        <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbars="none" >"
-            
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:scrollbars="none" >
+
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:orientation="vertical" >
-                
+
                 <TableRow>
 
                     <TextView
@@ -95,6 +96,24 @@
 
                     <TextView
                         android:id="@+id/about_hwVer"
+                        style="@style/textstyle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/about_id" />
+
+                    <TextView
+                        android:id="@+id/about_id"
                         style="@style/textstyle2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,8 +228,7 @@
                         android:singleLine="true" />
                 </TableRow>
             </TableLayout>
-        
-        </ScrollView>
+        </HorizontalScrollView>
         
     </LinearLayout>
 

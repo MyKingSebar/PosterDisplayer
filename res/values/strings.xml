@@ -40,6 +40,7 @@
     <string name="about_kernelver">内 核 版 本 号:</string>
     <string name="about_swver">软 件 版 本 号:</string>
     <string name="about_hwver">硬 件 版 本 号:</string>
+    <string name="about_id">终端 I D:</string>
     <string name="about_mac">M A C 地 址:</string>
     <string name="about_connStatus">网 络 连 接 状 态:</string>
     <string name="about_certNum">入 网 许 可 证 号:</string>

@@ -889,7 +889,7 @@ public class PosterApplication extends Application
         sysParam.syspasswdvalue = "";
         sysParam.brightnessvalue = 60;
         sysParam.volumevalue = 60;
-        sysParam.swVervalue = "4.0.1.0";
+        sysParam.swVervalue = "4.0.1.1";
         sysParam.hwVervalue = "1.0.0.0";
         sysParam.kernelvervalue = getKernelVersion();
         sysParam.cfevervalue = android.os.Build.VERSION.RELEASE;

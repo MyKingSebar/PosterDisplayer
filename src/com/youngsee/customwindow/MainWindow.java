@@ -348,6 +348,11 @@ public class MainWindow extends PosterBaseView
     @Override
     public void viewDestroy()
     {
+    	stopPlay();
+    	mVideoView = null;
+    	mPlayList = null;
+    	cancelUpdateThread();
+    	
         myHandler.removeMessages(EVENT_PROGRESS_CHANGED);
         myHandler.removeMessages(EVENT_HIDE_CONTROLER);
         myHandler.removeMessages(EVENT_HANDLE_VIDEO_ABEND);
@@ -355,8 +360,6 @@ public class MainWindow extends PosterBaseView
         myHandler.removeMessages(EVENT_HIDE_ALL_CONTROLER_BAR);
         myHandler.removeMessages(EVENT_SHOW_PROGRESS_BAR);
         myHandler.removeMessages(EVENT_HIDE_PROGRESS_BAR);
-        
-        stopPlay();
         
         if (mControlWindow != null && mControlWindow.isShowing())
         {
@@ -695,6 +698,10 @@ public class MainWindow extends PosterBaseView
         public void cancel()
         {
             mIsRun = false;
+            if (isPaused())
+            {
+            	onResume();
+            }
             this.interrupt();
         }
         

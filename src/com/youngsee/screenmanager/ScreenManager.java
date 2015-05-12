@@ -806,7 +806,7 @@ public class ScreenManager
             // 重新获取节目
             return (getPlayProgram(mNormalProgramInfoList, NORMAL_PROGRAM));
         }
-        
+
         /*
          * 加载节目内容
          */
@@ -820,8 +820,11 @@ public class ScreenManager
             else if (msgId == EVENT_SHOW_URGENT_PROGRAM &&
                      pgmInfo.verifyCode.equals(mCurrentUrgentPgmVerifyCode))
             {
-                logger.i("loadProgramContent(): urgent program is playing.");
-                return true;
+            	if (UrgentPlayerActivity.INSTANCE != null)
+            	{
+                    logger.i("loadProgramContent(): urgent program is playing.");
+                    return true;
+            	}
             }
             else if (msgId == EVENT_SHOW_NORMAL_PROGRAM &&
                      pgmInfo.verifyCode.equals(mCurrentNormalPgmVerifyCode))

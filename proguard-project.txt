@@ -12,7 +12,19 @@
 
 # Add any project specific keep options here:
 
+#设置混淆的压缩比率 0 ~ 7
 -optimizationpasses 5
+
+#混淆后生产映射文件map类名->转化后类名的映射
+-dontpreverify
+-verbose
+
+# 代码优化
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+-keepattributes *Annotation*
+# 过滤泛型
+-keepattributes Signature
 
 -libraryjars libs/log4j-1.2.13.jar
 -libraryjars libs/android-support-v4.jar
@@ -39,8 +51,6 @@
 
 -keep public class com.youngsee.common.Contants
 -keep public class com.youngsee.update.UpdateApkInfo
--keep public class com.youngsee.webservices.SysParam
--keep public class com.youngsee.webservices.XmlParser
 
 -keep class it.sauronsoftware.ftp4j.**
 -keep class org.apache.** {*;}
@@ -52,11 +62,27 @@
 -keep class android.support.v4.**
 -keep interface android.support.v4.app.** {*;}
 
--keep class com.youngsee.webservices.** {*;}
 -keep class com.youngsee.osd.OsdSubMenuFragment {*;}
+
+-keep class com.youngsee.screenmanager.Areas {*;}
+-keep class com.youngsee.screenmanager.Medias {*;}
+-keep class com.youngsee.screenmanager.PlayFiles {*;}
+-keep class com.youngsee.screenmanager.PlayLists {*;}
+-keep class com.youngsee.screenmanager.ProgramLists {*;}
+-keep class com.youngsee.screenmanager.Playbills {*;}
+-keep class com.youngsee.screenmanager.Programs {*;}
+-keep class com.youngsee.screenmanager.ScheduleLists {*;}
+-keep class com.youngsee.screenmanager.Schedules {*;}
+
+-keep class com.youngsee.webservices.SysParam {*;}
+-keep class com.youngsee.webservices.XmlParser {*;}
 
 -keepclasseswithmembernames class * {                                           # 保持 native 方法不被混淆
     native <methods>;
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context);
 }
 
 -keepclasseswithmembers class * {                                               # 保持自定义控件类不被混淆
